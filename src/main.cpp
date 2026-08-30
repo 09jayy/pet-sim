@@ -4,29 +4,40 @@
 #include <variant>
 #include "Cat.h"
 #include "Dog.h"
+#include "Actions.h"
 
 int main() {
-    std::string action;
+    std::string userAction;
     std::variant<Cat, Dog> pet;
     bool game = true;
 
-    std::unordered_map<std::string, std::function<bool()>> actions = {
-        {"eat", [&pet] { return std::visit([](auto& p) { return p.eat(); }, pet); }},
-        {"sleep", [&pet] { return std::visit([](auto& p) { return p.sleep(); }, pet); }},
-        {"play", [&pet] { return std::visit([](auto& p) { return p.play(); }, pet); }},
-        {"die", [&pet] { return std::visit([](auto& p) { return p.die(); }, pet); }}
+    std::unordered_map<Actions, std::function<bool()>> actions = {
+        {Actions::Eat, [&pet] {
+            return std::visit([](auto& p) { return p.eat(); }, pet);
+        }},
+        {Actions::Sleep, [&pet] {
+            return std::visit([](auto& p) { return p.sleep(); }, pet);
+        }},
+        {Actions::Play, [&pet] {
+            return std::visit([](auto& p) { return p.play(); }, pet);
+        }},
+        {Actions::Die, [&pet] {
+            return std::visit([](auto& p) { return p.die(); }, pet);
+        }},
+        {Actions::Unknown, [] {
+            std::cout << "invalid" << "\n"; return true;
+        }}
     };
 
     std::cout << "Hello from pet-sim!" << std::endl;
     while (game) {
         std::cout << "What do you want to do?" << "\n";
-        std::cin >> action;
+        std::cin >> userAction;
 
-        game = actions[action]();
+        game = actions[action(userAction)]();
 
         std::cout << game << "\n";
         std::visit([](auto& p) { std::cout << p << "\n"; }, pet);
     }
-
-    return 0;
+    std::cout << "GAME OVER";
 }

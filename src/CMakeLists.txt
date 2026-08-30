@@ -4,6 +4,7 @@ add_executable(${PROJECT_NAME} main.cpp
         ../include/Dog.h
         Cat.cpp
         Dog.cpp
+        ../include/Actions.h
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
