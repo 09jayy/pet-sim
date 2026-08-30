@@ -1,7 +1,7 @@
 #include "Dog.h"
 
 bool Dog::is_alive() const {
-    return hunger != 0 || wake != 0 || happy != 0 || hunger < 20 || wake < 20 || happy < 20;
+    return hunger > 0 && wake > 0 && happy > 0;
 }
 
 bool Dog::eat() {

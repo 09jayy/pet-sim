@@ -30,6 +30,27 @@ int main() {
     };
 
     std::cout << "Hello from pet-sim!" << std::endl;
+
+    // Choose Pet
+    bool choosing = true;
+    std::string petChoice;
+    while (choosing) {
+        std::cout << "Please choose your pet (cat/dog): ";
+        std::cin >> petChoice;
+        if (petChoice != "cat" && petChoice != "dog") {
+            std::cout << "invalid, try again" << "\n";
+        }
+        if (petChoice == "cat") {
+            choosing = false;
+            pet = Cat{};
+        }
+        if (petChoice == "dog") {
+            choosing = false;
+            pet = Dog{};
+        }
+    }
+
+    // Interact with Pet
     while (game) {
         std::cout << "What do you want to do?" << "\n";
         std::cin >> userAction;
