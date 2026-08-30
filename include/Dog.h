@@ -5,7 +5,7 @@
 
 class Dog {
 private:
-    int happy, hunger, wake;
+    int happy{10}, hunger{10}, wake{10};
 
     bool is_alive() const;
 public:

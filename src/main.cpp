@@ -36,7 +36,6 @@ int main() {
 
         game = actions[action(userAction)]();
 
-        std::cout << game << "\n";
         std::visit([](auto& p) { std::cout << p << "\n"; }, pet);
     }
     std::cout << "GAME OVER";
